@@ -1,0 +1,12 @@
+@charset "ISO-8859-1";
+
+.alertamensagemmsgErro span{
+	background-color: red;
+	color: yellow;
+	width: 100px;
+	margin: auto;
+}
+.alertamensagemmsgSucesso span{
+	background-color: green;
+	color: white;
+}

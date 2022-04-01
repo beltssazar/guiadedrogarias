@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link href="../materialize/css/materialize.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="../css/listaadm.css" rel="stylesheet">
+<script src="materialize/js/materialize.js"></script>
+<title>Lista de Tipos</title>
+</head>
+<body>
+
+ <div class="row" style="display: flex; width: 50%;">
+    <form class="col s12" action="buscaPalavras">
+      <div class="row">
+        <div class="input-field col s12">
+          <input name="palavra"  type="search" class="validate"><button type="submit"><i class="material-icons">search</i></button>
+          <label>Busca por Palavras Chave</label>
+         
+        </div>
+      </div>
+    </form>
+  </div>
+
+<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Tipo</th>
+				<th>Opção Segmento</th>
+				<th>Descrição</th>
+				<th>Palavras Chave</th>
+				<th>Alterar</th>
+				<th>Excluir</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="t:${tipos}">
+				<td th:text="${t.id}">
+				<td th:text="${t.tipo}">
+				<td th:text="${t.opcao}">
+				<td th:text="${t.descricao}">
+				<td th:text="${t.palavrasChave}">
+				<td><a th:href="@{/alteraTipo(id=${t.id})}"><i class="material-icons">create</i></a></td>
+				<td><a th:href="@{/excluiTipo(id=${t.id})}"><i class="material-icons">delete</i></a></td>
+			</tr>
+		</tbody>
+	</table>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de Tipos</title>
+<link href="materialize/css/materialize.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link href="css/cadadm.css" rel="stylesheet">
+<script src="materialize/js/materialize.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>Cadastro de Segmentos</h1>
+		<form class="col s12" action="salvarTipo" method="post">
+			<input type="hidden" name="id"> 
+			<label>Selecione o Tipo</label> 
+				<select class="browser-default" name="tipo">
+				<option value="" disabled selected>Selecione o Tipo</option>
+				<option th:each="t: ${tipos}" th:value="${t.name()}" th:text="${t}" th:selected="${t == seg?.tipo}"></option>
+			</select> 
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="text" type="text" class="validate" name="opcao" th:value="${seg?.opcao}"> <label
+						for="text">Opções de Segmento</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<textarea id="textarea2" class="materialize-textarea"
+						data-length="120" name="descricao" th:text="${seg?.descricao}"></textarea>
+					<label for="textarea2">Descrição</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="text" type="text" class="validate" name="palavrasChave" th:value="${seg?.palavrasChave}"> <label
+						for="text">Palavras Chave</label>
+				</div>
+			</div>
+
+			<button class="btn waves-effect waves-light" type="submit"
+				name="saveTipo">
+				Cadastrar <i class="material-icons right">send</i>
+			</button>
+		</form>
+		<!-- <div th:replace="fragments/mensagem"></div> -->
+		<div class="alertamensagemmsgErro"
+			th:if="${not #strings.isEmpty(mensagemErro)}">
+			<span th:text="${mensagemErro}"></span>
+		</div>
+		<div class="alertamensagemmsgSucesso"
+			th:if="${not #strings.isEmpty(mensagemSucesso)}">
+			<span th:text="${mensagemSucesso}"></span>
+		</div>
+	</div>
+
+</body>
+</body>
+</html>

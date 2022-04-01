@@ -1,0 +1,34 @@
+@charset "ISO-8859-1";
+
+table {
+	border: solid 2px red;
+	width: 50%;
+	margin: auto;
+	margin-top: 50px;
+	box-shadow: 5px 5px 5px black;
+}
+table th, td {
+	text-align: center;
+	border: solid 2px red;
+}
+.pagination{
+	position: fixed;
+	bottom: 30px;
+	left: 45%;	
+}
+.nav-wrapper{
+	background-color: #536dfe;
+	height: 100px;
+}
+.nav-wrapper img{
+	width: 10%;
+}
+.material-icons2{
+	color: red; 
+}
+.page-footer{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	background-color: #536dfe;
+}
