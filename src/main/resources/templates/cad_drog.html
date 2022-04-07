@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Cadastro de Drogarias</title>
+<link href="materialize/css/materialize.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link href="css/cadadm.css" rel="stylesheet">
+<script src="materialize/js/materialize.js"></script>
+</head>
+<body>
+	<div class="container">
+		<h1>Cadastro de Drogarias</h1>
+		<form class="col s12" action="salvarDrog" method="post">
+		<input type="hidden" name="id">
+		<div class="row">
+				<div class="input-field col s12">
+					<input id="text" type="text" class="validate" name="nome" > <label
+						for="text">Nome</label>
+				</div>
+			</div> 
+			<label>Selecione o Tipo</label> 
+				<select class="browser-default" name="tipo">
+				<option value="" disabled selected>Selecione o Tipo</option>
+				<option th:each="t: ${tipos}" th:value="${t}" th:text="${t.opcao}" th:selected="${t.tipo}"></option>
+			</select>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="cep" type="text" class="validate" name="cep" > <label
+						for="cep">CEP</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="endereco" type="text" disabled="disabled" class="validate" name="endereco" > <label
+						for="text">Endereço</label>
+				</div>
+			</div>
+			 
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="text" type="text" class="validate" name="numero" > <label
+						for="text">Número</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="bairro" type="text" class="validate" name="bairro" > <label
+						for="text">Bairro</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="cidade" type="text" class="validate" name="cidade" > <label
+						for="text">Cidade</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="estado" type="text" class="validate" name="estado" > <label
+						for="text">Estado</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="text" type="text" class="validate" name="formasPagamento" > <label
+						for="text">Formas de Pagamento</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="text" type="text" class="validate" name="horario" > <label
+						for="text">Horário</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="text" type="text" class="validate" name="site" > <label
+						for="text">Site</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<input id="text" type="text" class="validate" name="telefone" > <label
+						for="text">Telefone</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="input-field col s12">
+					<textarea id="textarea2" class="materialize-textarea"
+						data-length="120" name="descricao" ></textarea>
+					<label for="textarea2">Descrição</label>
+				</div>
+			</div>
+			<label>Adicionais</label>
+			<br>
+			 <label>
+        <input type="checkbox"  class="filled-in" checked="checked" />
+        <span>Delivery</span>
+      </label>
+      <label>
+        <input type="checkbox" class="filled-in" checked="checked" />
+        <span>Acessibilidade</span>
+      </label>
+      <label>
+        <input type="checkbox" class="filled-in" checked="checked" />
+        <span>Estacionamento</span>
+      </label>
+      <br>
+     <br>
+			<button class="btn waves-effect waves-light" type="submit"
+				name="saveTipo">
+				Cadastrar <i class="material-icons right">send</i>
+			</button>
+		</form>
+		<!-- <div th:replace="fragments/mensagem"></div> -->
+		<div class="alertamensagemmsgErro"
+			th:if="${not #strings.isEmpty(mensagemErro)}">
+			<span th:text="${mensagemErro}"></span>
+		</div>
+		<div class="alertamensagemmsgSucesso"
+			th:if="${not #strings.isEmpty(mensagemSucesso)}">
+			<span th:text="${mensagemSucesso}"></span>
+		</div>
+	</div>
+	
+<script>
+	const cepInput = document.getElementById("cep");
+	
+	cepInput.addEventListener("change", async (evento) => {
+		try {
+			const buscaCep = await fetch(`https://viacep.com.br/ws/${evento.target.value}/json/`).then(resposta => resposta.json())
+			document.getElementById("endereco").value = buscaCep.logradouro
+			document.getElementById("bairro").value = buscaCep.bairro
+			document.getElementById("cidade").value = buscaCep.localidade
+			document.getElementById("estado").value = buscaCep.uf
+		} catch (e) {
+			return alert("erro" + e)
+		}
+	})
+</script>
+</body>
+</html>

@@ -15,4 +15,8 @@ public interface SegRepository extends PagingAndSortingRepository<Segmento, Long
 		@Query("SELECT s FROM Segmento s WHERE s.palavrasChave LIKE %:p%")
 		public List<Segmento> buscarPorPalavrasChave(@Param("p") String palavra);
 
+		public List<Segmento> findAllByOrderByOpcaoAsc();
+		
 }
+
+
