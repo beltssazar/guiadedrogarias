@@ -12,7 +12,7 @@
 <body>
 	<div class="container">
 		<h1>Cadastro de Segmentos</h1>
-		<form class="col s12" action="salvarTipo" method="post">
+		<form class="col s12" action="salvarTipo" method="post" >
 			<input type="hidden" name="id"> 
 			<label>Selecione o Tipo</label> 
 				<select class="browser-default" name="tipo">
@@ -31,20 +31,21 @@
 						data-length="120" name="descricao" th:text="${seg?.descricao}"></textarea>
 					<label for="textarea2">Descrição</label>
 				</div>
+			
 			</div>
-			<div class="row">
+				<div class="row">
 				<div class="input-field col s12">
 					<input id="text" type="text" class="validate" name="palavrasChave" th:value="${seg?.palavrasChave}"> <label
 						for="text">Palavras Chave</label>
 				</div>
 			</div>
-			 
-			
+		
 			<button class="btn waves-effect waves-light" type="submit"
 				name="saveTipo">
 				Cadastrar <i class="material-icons right">send</i>
 			</button>
 		</form>
+		
 		<!-- <div th:replace="fragments/mensagem"></div> -->
 		<div class="alertamensagemmsgErro"
 			th:if="${not #strings.isEmpty(mensagemErro)}">
