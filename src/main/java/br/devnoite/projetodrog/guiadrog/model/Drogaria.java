@@ -19,7 +19,7 @@ public class Drogaria {
 	@Column(columnDefinition = "TEXT")
 	private String descricao;
 	private String cep;
-	private String endereço;
+	private String endereco;
 	private String numero;
 	private String bairro;
 	private String cidade;
@@ -36,5 +36,15 @@ public class Drogaria {
 	@Column(columnDefinition = "TEXT")
 	private String fotos;
 	private int preco;
+	
+	//retorna as fotos na forma de vetor de String
+	public String[] verFotos() {
+		return fotos.split(";");
+	}
+	
+	public String getEnderecoCompleto() {
+		return getEndereco()+","+getNumero()+"-"+getBairro()+","+getCidade()+"-"+getEstado();
+	
+	}
 	
 }

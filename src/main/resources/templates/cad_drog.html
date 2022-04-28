@@ -13,118 +13,134 @@
 	<div class="container">
 		<h1>Cadastro de Drogarias</h1>
 		<form class="col s12" action="salvaDrog" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="id">
+		<input type="hidden" name="id" >
 		<div class="row">
 				<div class="input-field col s12">
-					<input id="text" type="text" class="validate" name="nome" > <label
+					<input id="text" type="text" class="validate" name="nome" th:value="${drog?.nome}"> <label
 						for="text">Nome</label>
 				</div>
 			</div> 
 			<label>Selecione o Tipo</label> 
 				<select class="browser-default" name="tipo.id">
 				<option value="" disabled selected>Selecione o Tipo</option>
-				<option th:each="t: ${tipos}" th:value="${t.id}" th:text="${t.opcao}" th:selected="${t.tipo}"></option>
+				<option th:each="t: ${tipos}" th:value="${t.id}" th:text="${t.opcao}" th:selected="${t == drog?.tipo}"></option>
 			</select>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="cep" type="text" class="validate" name="cep" > <label
+					<input id="cep" type="text" class="validate" name="cep" th:value="${drog?.cep}" > <label
 						for="cep">CEP</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="endereco" type="text" class="validate" name="endereco" readonly="readonly"> <label
+					<input id="endereco" type="text" class="validate" name="endereco" readonly="readonly" th:value="${drog?.endereco}"> <label
 						for="text">Endereço</label>
 				</div>
 			</div>
 			 
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="text" type="text" class="validate" name="numero" > <label
+					<input id="text" type="text" class="validate" name="numero" th:value="${drog?.numero}"> <label
 						for="text">Número</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="bairro" type="text" class="validate" name="bairro" readonly="readonly"> <label
+					<input id="bairro" type="text" class="validate" name="bairro" readonly="readonly" th:value="${drog?.bairro}"> <label
 						for="text">Bairro</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="cidade" type="text" class="validate" name="cidade" readonly="readonly"> <label
+					<input id="cidade" type="text" class="validate" name="cidade" readonly="readonly" th:value="${drog?.cidade}"> <label
 						for="text">Cidade</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="estado" type="text" class="validate" name="estado" readonly="readonly" > <label
+					<input id="estado" type="text" class="validate" name="estado" readonly="readonly" th:value="${drog?.estado}"> <label
 						for="text">Estado</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="estado" type="number" class="validate" name="preco"> <label
+					<input id="estado" type="number" class="validate" name="preco" th:value="${drog?.preco}"> <label
 						for="text">Preço</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="text" type="text" class="validate" name="formasPagamento" > <label
+					<input id="text" type="text" class="validate" name="formasPagamento" th:value="${drog?.formasPagamento}"> <label
 						for="text">Formas de Pagamento</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="text" type="text" class="validate" name="horario" > <label
+					<input id="text" type="text" class="validate" name="horario" th:value="${drog?.horario}"> <label
 						for="text">Horário</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="text" type="text" class="validate" name="site" > <label
+					<input id="text" type="text" class="validate" name="site" th:value="${drog?.site}"> <label
 						for="text">Site</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
-					<input id="text" type="text" class="validate" name="telefone" > <label
+					<input id="text" type="text" class="validate" name="telefone" th:value="${drog?.telefone}"> <label
 						for="text">Telefone</label>
 				</div>
 			</div>
 			<div class="row">
 				<div class="input-field col s12">
 					<textarea id="textarea2" class="materialize-textarea"
-						data-length="120" name="descricao" ></textarea>
+						data-length="120" name="descricao" th:text="${drog?.descricao}" ></textarea>
 					<label for="textarea2">Descrição</label>
 				</div>
 			</div>
 			<label>Adicionais</label>
 			<br>
 			 <label>
-        <input type="checkbox"  class="filled-in" checked="checked" />
+        <input type="checkbox"  class="filled-in" checked="checked" name="delivery" th:checked="${drog?.delivery}" />
         <span>Delivery</span>
       </label>
       <label>
-        <input type="checkbox" class="filled-in" checked="checked" />
+        <input type="checkbox" class="filled-in" checked="checked" name="acessibilidade" th:checked="${drog?.acessibilidade}"/>
         <span>Acessibilidade</span>
       </label>
-      <label>
-        <input type="checkbox" class="filled-in" checked="checked" />
+      <label> 
+        <input type="checkbox" class="filled-in" checked="checked" name="estacionamento" th:checked="${drog?.estacionamento}" />
         <span>Estacionamento</span>
       </label>
       <br>
      <br>
      
+     <input type="hidden" th:value="${drog?.fotos}" name="fotos">
+     
      <div class="file-field input-field">
       <div class="btn">
         <span>File</span>
-        <input type="file" name="fileFotos"  multiple accept="image/*">
+        <input type="file" name="fileFotos"  multiple accept="image/*" th:value="${drog?.fotos}">
       </div>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text" placeholder="Faça o upload de uma ou mais fotos">
       </div>
     </div>
+    
+    <div th:if="${drog?.fotos?.length > 0}">
+    	<h6>Fotos Cadastradas</h6>
+    	<div>
+    		<ul>
+    		<li th:each="foto, i : ${drog?.verFotos()}">
+    			<a th:href="${foto}" target="blank"><img th:src="${foto}"></a>
+    			<a th:href="@{/excluirFotos(idDrog=${drog?.id},numFoto=${i.index})}"><i class="material-icons">clear</i></a>
+    		</li>
+    		
+    		</ul>
+    	</div>
+    </div> 
+    
 			<button class="btn waves-effect waves-light" type="submit"
 				name="saveTipo">
 				Cadastrar <i class="material-icons right">send</i>

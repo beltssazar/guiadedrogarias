@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link href="../materialize/css/materialize.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="../css/listaadm.css" rel="stylesheet">
+<script src="materialize/js/materialize.js"></script>
+<title>Lista de Drogarias</title>
+</head>
+<body>
+
+<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Tipo</th>
+				<th>Endereço Completo</th>
+				<th>Formas de Pagamento</th>
+				<th>Horário</th>
+				<th>Site</th>
+				<th>Telefone</th>
+				<th>Descrição</th>
+				<th>Fotos</th>
+				<th>Alterar</th>
+				<th>Excluir</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="d:${drogs}">
+				<td th:text="${d.id}">
+				<td th:text="${d.nome}">
+				<td th:text="${d.tipo.opcao}">
+				<td th:text="${d.getEnderecoCompleto}">
+				<td th:text="${d.formasPagamento}">
+				<td th:text="${d.horario}">
+				<td th:text="${d.site}">
+				<td th:text="${d.telefone}">
+				<td th:text="${d.descricao}">
+				<td th:text="${d.fotos}">
+				<td><a th:href="@{/alteraDrog(id=${d.id})}"><i class="material-icons">create</i></a></td>
+				<td><a th:href="@{/excluiDrog(id=${d.id})}"><i class="material-icons">delete</i></a></td>
+			</tr>
+		</tbody>
+	</table>
+
+
+</body>
+</html>

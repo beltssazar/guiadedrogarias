@@ -3,6 +3,7 @@ package br.devnoite.projetodrog.guiadrog.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.devnoite.projetodrog.guiadrog.annotation.Publico;
 import br.devnoite.projetodrog.guiadrog.model.Administrador;
 import br.devnoite.projetodrog.guiadrog.repository.AdminRepository;
 import br.devnoite.projetodrog.guiadrog.util.HashUtil;
@@ -117,5 +119,29 @@ public class AdmController {
 		repository.deleteById(id);
 		return "redirect:listaAdm/1";
 		
+	}
+	
+	@Publico
+	@RequestMapping("login")
+	public String login(Administrador admLogin, RedirectAttributes attr, HttpSession session) {
+		//busca o adm no BD
+		Administrador admin = repository.findByEmailAndSenha(admLogin.getEmail(), admLogin.getSenha());
+		//verifica se os dados do adm existem
+		if(admin == null) {
+			attr.addFlashAttribute("mensagemErro", "Login e/ou senha inválido(s)");
+			return "redirect:/";
+		}else {
+			//salva o adm na sessão
+			session.setAttribute("usuarioLogado", admin);
+			return "redirect:/listaAdm/1";
+		}
+	}
+	
+	@RequestMapping("logout")
+	public String logout(HttpSession session) {
+		// invalida a sessão
+		session.invalidate();
+		// voltar para a página inicial
+		return "redirect:/";
 	}
 }

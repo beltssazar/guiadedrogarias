@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="../materialize/css/materialize.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<link href="../css/listaadm.css" rel="stylesheet">
+<script src="materialize/js/materialize.js"></script>
+</head>
+<body>
+	<header th:fragments="rodape">
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">Logo</a>
+				
+					<ul id="nav-mobile" class="right hide-on-med-and-down"
+						th:if="${session.usuarioLogado != null}">
+						<li><button style="background-color: red;">
+								<a href="/cadAdm" target="blank">CAD. ADMIN</a>
+							</button></li>
+						<li><button style="background-color: red;">
+								<a href="/cadTipo">CAD. TIPO</a>
+							</button></li>
+						<li><button style="background-color: red;">
+								<a href="/cadDrog">CAD. DROG</a>
+							</button></li>
+						<li><button style="background-color: red;">
+								<a href="/listaAdm/1">ADMINS</a>
+							</button></li>
+						<li><button style="background-color: red;">
+								<a href="/listaTipo">TIPO</a>
+							</button></li>
+						<li><button style="background-color: red;">
+								<a href="/listaDrog">DROGS</a>
+							</button></li>
+						<li><a><i class="material-icons">input</i></a></li>
+					</ul>
+				
+			</div>
+		</nav>
+	</header>
+
+	<div class="container">
+		<h1>Área de Login</h1>
+		<form class="col s12" action="login" method="post">
+			<input type="hidden" name="id" th:value="${adm?.id}">
+			<div class="row">
+				<div class="input-field col s6">
+					<i class="material-icons prefix">account_circle</i> <input
+						id="icon_prefix" type="email" class="validate" name="email">
+					<label for="icon_prefix">Usuário</label>
+				</div>
+				<div class="input-field col s6">
+					<i class="material-icons prefix">lock</i> <input
+						id="icon_telephone" type="password" class="validate" name="senha">
+					<label for="icon_telephone">Senha</label>
+				</div>
+			</div>
+			<button class="btn waves-effect waves-light" type="submit"
+				name="saveAdm">
+				ENTRAR <i class="material-icons right">send</i>
+			</button>
+		</form>
+		<!-- <div th:replace="fragments/mensagem"></div> -->
+		<div class="alertamensagemmsgErro"
+			th:if="${not #strings.isEmpty(mensagemErro)}">
+			<span th:text="${mensagemErro}"></span>
+		</div>
+		<div class="alertamensagemmsgSucesso"
+			th:if="${not #strings.isEmpty(mensagemSucesso)}">
+			<span th:text="${mensagemSucesso}"></span>
+		</div>
+	</div>
+
+</body>
+<footer th:fragments="rodape" class="page-footer">
+	<div class="container">
+		© 2014 Copyright Text <a class="grey-text text-lighten-4 right"
+			href="#!">More Links</a>
+	</div>
+</footer>
+
+
+</html>

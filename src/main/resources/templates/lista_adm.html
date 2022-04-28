@@ -4,21 +4,36 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link href="../materialize/css/materialize.css" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
 <link href="../css/listaadm.css" rel="stylesheet">
 </head>
 <body>
 	<header th:fragments="rodape">
- <nav>
-    <div class="nav-wrapper">
-      <a href="#" class="brand-logo">Logo</a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><button><a href="sass.html">ADMINISTRADORES</a></button></li>
-        <li><a href="collapsible.html"><i class="material-icons">input</i></a></li>
-      </ul>
-    </div>
-  </nav>
-  </header>
+		<nav>
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo">Logo</a>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><button style="background-color: red;">
+							<a href="/cadAdm">CAD. ADMIN</a>
+						</button></li>
+					<li><button style="background-color: red;">
+							<a href="/cadTipo">CAD. TIPO</a>
+						</button></li>
+					<li><button style="background-color: red;">
+							<a href="/cadDrog">CAD. DROG</a>
+						</button></li>
+					<li><button style="background-color: red;">
+							<a href="/listaTipo">TIPO</a>
+						</button></li>
+					<li><button style="background-color: red;">
+							<a href="/listaDrog">DROGS</a>
+						</button></li>
+					<li><a href="/logout"><i class="material-icons">input</i></a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
 
 	<table>
 		<thead>
@@ -35,29 +50,34 @@
 				<td th:text="${adm.id}">
 				<td th:text="${adm.nome}">
 				<td th:text="${adm.email}">
-				<td><a th:href="@{/alteraAdm(id=${adm.id})}"><i class="material-icons">create</i></a></td>
-				<td><a th:href="@{/excluiAdm(id=${adm.id})}"><i class="material-icons">delete</i></a></td>
+				<td><a th:href="@{/alteraAdm(id=${adm.id})}"><i
+						class="material-icons">create</i></a></td>
+				<td><a th:href="@{/excluiAdm(id=${adm.id})}"><i
+						class="material-icons">delete</i></a></td>
 			</tr>
 		</tbody>
 	</table>
 	<ul class="pagination">
-		<li th:class="${pagAtual == 1 ? 'disabled' : 'waves-effect'}"><a th:href="${pagAtual > 1 ? pagAtual - 1 : '#'}"><i class="material-icons">chevron_left</i></a></li>
-		
-		<li th:class="${pagAtual == p ? 'active blue' : 'waves-effect'}" th:each="p:${numPaginas}">
-			<a th:href="${p}"><span th:text="${p}"></span></a>
-		</li>
-		
-		<li th:class="${pagAtual == totalPages ? 'disabled' : 'waves-effect'}"><a th:href="${pagAtual != totalPages ? pagAtual + 1 : '#'}"><i
+		<li th:class="${pagAtual == 1 ? 'disabled' : 'waves-effect'}"><a
+			th:href="${pagAtual > 1 ? pagAtual - 1 : '#'}"><i
+				class="material-icons">chevron_left</i></a></li>
+
+		<li th:class="${pagAtual == p ? 'active blue' : 'waves-effect'}"
+			th:each="p:${numPaginas}"><a th:href="${p}"><span
+				th:text="${p}"></span></a></li>
+
+		<li th:class="${pagAtual == totalPages ? 'disabled' : 'waves-effect'}"><a
+			th:href="${pagAtual != totalPages ? pagAtual + 1 : '#'}"><i
 				class="material-icons">chevron_right</i></a></li>
 	</ul>
-	
+
 </body>
 <footer th:fragments="rodape" class="page-footer">
-            <div class="container">
-            © 2014 Copyright Text
-            <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
-            </div>
-        </footer>
+	<div class="container">
+		© 2014 Copyright Text <a class="grey-text text-lighten-4 right"
+			href="#!">More Links</a>
+	</div>
+</footer>
 
-     
+
 </html>

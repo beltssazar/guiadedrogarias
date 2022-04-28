@@ -17,6 +17,8 @@ public interface SegRepository extends PagingAndSortingRepository<Segmento, Long
 
 		public List<Segmento> findAllByOrderByOpcaoAsc();
 		
+		
+		
 }
 
 

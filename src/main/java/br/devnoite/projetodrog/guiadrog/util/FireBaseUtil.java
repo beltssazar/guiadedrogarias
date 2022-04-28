@@ -5,13 +5,18 @@ import java.util.UUID;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.auth.Credentials;
 import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobId;
+import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
 
+@Service
 public class FireBaseUtil {
 	//variável para guardar as credenciais de acesso
 	private Credentials credenciais;
@@ -49,9 +54,26 @@ public class FireBaseUtil {
 	}
 	
 	//métozdo que faz o upload
-	public String upload(MultipartFile arquivo) {
+	public String upload(MultipartFile arquivo) throws IOException {
 		//gera um nome aleatório para o arquivo
 		String nomeArquivo = UUID.randomUUID().toString() + getExtensao(arquivo.getOriginalFilename());
-		return "";
+		//criar um blobid através do nome gerado para o arquivo
+		BlobId blobId = BlobId.of(BUCKET_NAME, nomeArquivo);
+		//criar o blobinfo através do blobid
+		BlobInfo blobInfo = BlobInfo.newBuilder(blobId).setContentType("media").build();
+		//gravar o blobinfo no Storage passando os bytes
+		storage.create(blobInfo, arquivo.getBytes());
+		//retorna a URL do arquivo gerado no Storage
+		return String.format(DOWNLOAD_URL, nomeArquivo);
+	}
+	
+	//método que exclui o arquivo do storage
+	public void deletar(String nomeArquivo) {
+		//retirar o prefixo e sufixo da String
+		nomeArquivo = nomeArquivo.replace(PREFIX, "").replace(SUFFIX, "");
+		//obter um Blob através do nome
+		Blob blob = storage.get(BlobId.of(BUCKET_NAME, nomeArquivo));
+		//delete através do blob
+		storage.delete(blob.getBlobId());
 	}
 } 
